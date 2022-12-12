@@ -1,21 +1,31 @@
+const searchBar = document.getElementById('search-text')
+const searchBtn = document.getElementById('search-btn')
+const main = document.getElementById("main")
 
+    searchBtn.addEventListener('click', function() {
+        fetch(`http://www.omdbapi.com/?s=${searchBar.value}&apikey=b0dd4daf`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            for (let movie of data.Search) {
 
-fetch("http://www.omdbapi.com/?i=tt3896198&apikey=b0dd4daf")
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        let main = document.getElementById("main")
-        main.innerHTML = `
-        <div class="movie-container">
-            <img src="" alt="">
-            <div class="movie-text">
-                <h2 class="movie-title">Blade Runner</h2>
-                <span class="rating">8.1</span>
-                <span class="movie-length">117 min</span>
-                <span class="genres">Action, Drama Sci-Fi</span>
-                <button class="add-to-watchlist">Watchlist</button>
-                <p class="movie-description">A bladerunner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.</p>
-            </div>
-        </div>
-        `
+                main.innerHTML += `
+               <div class="movie-container">
+                   <img src="${movie.Poster}" alt="">
+                   <div class="movie-text">
+                       <h2 class="movie-title">${movie.Title}</h2>
+                       <span class="rating">1</span>
+                       <span class="movie-length">345</span>
+                       <span class="genres">Action</span>
+                       <button class="add-to-watchlist">Watchlist</button>
+                       <p class="movie-description">The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father the ambitious celestial being Ego.</p>
+                   </div>
+               </div>
+               `
+            }
+        })
     })
+
+ 
+
+    

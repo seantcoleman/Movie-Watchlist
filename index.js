@@ -1,7 +1,7 @@
 const searchBar = document.getElementById('search-text')
 const searchBtn = document.getElementById('search-btn')
 const main = document.getElementById("main")
-let watchlist = []
+let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []
 
 searchBar.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') getMovieList()

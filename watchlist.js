@@ -7,17 +7,24 @@ movieWatchlist.forEach(movie => {
         .then(res => res.json())
         .then(data => {
             main.innerHTML += `
-            <div class="movie-container">
-                <img src="${data.Poster}" alt="">
-                <div class="movie-text">
+        <div class="movie-container">
+            <img class="movie-poster" src="${data.Poster}" alt="">
+            <div class="movie-text">
+                <div class="title-rating">
                     <h2 class="movie-title">${data.Title}</h2>
                     <span class="rating">${data.Ratings[0].Value}</span>
+                </div>
+                <div class="length-genre-watchlist">
                     <span class="movie-length">${data.Runtime}</span>
                     <span class="genres">${data.Genre}</span>
-                    <button id="${data.imdbID}" class="add-to-watchlist")>Watchlist</button>
-                    <p class="movie-description">${data.Plot}</p>
+                    <div class="addRemove">
+                        <img src="/images/add-icon.png">
+                        <p id="${data.imdbID}" class="add-to-watchlist" onclick="addToWatchlist(${data.imdbID})")>Remove</p>
+                    </div>
                 </div>
+                <p class="movie-description">${data.Plot}</p>
             </div>
+        </div>
             `
         })
 })

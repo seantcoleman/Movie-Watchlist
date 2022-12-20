@@ -6,7 +6,15 @@ let watchlist = JSON.parse(localStorage.getItem("watchlist")) || []
 searchBar.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') getMovieList()
 })
+
 searchBtn.addEventListener('click', getMovieList)
+
+main.innerHTML = `
+    <div class="empty-block">
+        <img src="/images/movie-reel-icon.png" alt="">
+        <p>Search for a movie</p>
+    </div>
+`
 
 
 function getMovieList() {
@@ -37,13 +45,20 @@ function addToWatchlist(movie) {
 function getMovieHTML(data) {
     main.innerHTML += `
     <div class="movie-container">
-        <img src="${data.Poster}" alt="">
+        <img class="movie-poster" src="${data.Poster}" alt="">
         <div class="movie-text">
-            <h2 class="movie-title">${data.Title}</h2>
-            <span class="rating">${data.Ratings[0].Value}</span>
-            <span class="movie-length">${data.Runtime}</span>
-            <span class="genres">${data.Genre}</span>
-            <button id="${data.imdbID}" class="add-to-watchlist" onclick="addToWatchlist(${data.imdbID})")>Watchlist</button>
+            <div class="title-rating">
+                <h2 class="movie-title">${data.Title}</h2>
+                <span class="rating">${data.Ratings[0].Value}</span>
+            </div>
+            <div class="length-genre-watchlist">
+                <span class="movie-length">${data.Runtime}</span>
+                <span class="genres">${data.Genre}</span>
+                <div class="addRemove">
+                    <img src="/images/add-icon.png">
+                    <p id="${data.imdbID}" class="add-to-watchlist" onclick="addToWatchlist(${data.imdbID})")>Watchlist</p>
+                </div>
+            </div>
             <p class="movie-description">${data.Plot}</p>
         </div>
     </div>

@@ -16,7 +16,6 @@ main.innerHTML = `
     </div>
 `
 
-
 function getMovieList() {
     main.innerHTML = ''
     fetch(`http://www.omdbapi.com/?s=${searchBar.value}&apikey=b0dd4daf`)
@@ -33,13 +32,13 @@ function getMovieList() {
         })
     })
     .catch(err => main.innerHTML = `<p>Unable to find what you're looking for.</p>`)
-
 }
 
 function addToWatchlist(movie) {
     console.log(movie.id)
     watchlist.push(movie.id)
     window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
+    document.getElementById(movie.id).removeAttribute('onclick')
 }
 
 function getMovieHTML(data) {
@@ -54,9 +53,9 @@ function getMovieHTML(data) {
             <div class="length-genre-watchlist">
                 <span class="movie-length">${data.Runtime}</span>
                 <span class="genres">${data.Genre}</span>
-                <div class="addRemove">
+                <div class="addRemove" onclick="addToWatchlist(${data.imdbID})" id="${data.imdbID}">
                     <img src="/images/add-icon.png">
-                    <p id="${data.imdbID}" class="add-to-watchlist" onclick="addToWatchlist(${data.imdbID})")>Watchlist</p>
+                    <p class="add-to-watchlist")>Watchlist</p>
                 </div>
             </div>
             <p class="movie-description">${data.Plot}</p>

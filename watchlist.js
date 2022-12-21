@@ -18,7 +18,7 @@ movieWatchlist.forEach(movie => {
                     <span class="movie-length">${data.Runtime}</span>
                     <span class="genres">${data.Genre}</span>
                     <div class="addRemove">
-                        <img src="/images/add-icon.png">
+                        <img src="/images/remove-icon.png">
                         <p id="${data.imdbID}" class="add-to-watchlist" onclick="addToWatchlist(${data.imdbID})")>Remove</p>
                     </div>
                 </div>

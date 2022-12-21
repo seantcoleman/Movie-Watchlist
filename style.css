@@ -2,6 +2,7 @@
 
 html {
     font-size: 12px;
+    height: 100%;
 }
 
 body {
@@ -11,6 +12,8 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     background-color: #111;
+    height: 100%;
+    position: relative;
 }
 
 h1 {
@@ -38,8 +41,11 @@ header {
 }
 
 .search-bar {
+    position: absolute;
+    top: calc(208px - 21px);
+    left: 50%;
+    transform: translate(-50%);
     width: 90%;
-    margin: -20px auto 0 auto;
     display: flex;
     border-radius: 6px;
     border: 1px solid #D1D5DB;
@@ -71,6 +77,8 @@ main {
     justify-content: center;
     padding: 2.5em;
     background-color: white;
+    height: auto;
+    min-height: calc(100% - 208px - 5em);
 }
 
 .empty-block {

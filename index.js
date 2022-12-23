@@ -35,10 +35,12 @@ function getMovieList() {
 }
 
 function addToWatchlist(movie) {
-    console.log(movie.id)
-    watchlist.push(movie.id)
-    window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
-    document.getElementById(movie.id).removeAttribute('onclick')
+    if (!watchlist.includes(movie.id)) {
+        console.log(movie.id)
+        watchlist.push(movie.id)
+        window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
+        document.getElementById(movie.id).removeAttribute('onclick')
+    }
 }
 
 function getMovieHTML(data) {

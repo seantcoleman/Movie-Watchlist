@@ -1,13 +1,13 @@
-let movieWatchlist = JSON.parse(window.localStorage.getItem('watchlist'))
-const watchlist = document.getElementById('watchlist')
+let watchlist = JSON.parse(window.localStorage.getItem('watchlist'))
+const watchlistEl = document.getElementById('watchlist')
 
 function getWatchlist() {
-    movieWatchlist.forEach(movie => {
-        console.log(movie)
+    watchlistEl.innerHTML = ''
+    watchlist.forEach(movie => {
         fetch(`http://www.omdbapi.com/?i=${movie}&apikey=b0dd4daf`)
             .then(res => res.json())
             .then(data => {
-                watchlist.innerHTML += `
+                watchlistEl.innerHTML += `
             <div class="movie-container">
                 <img class="movie-poster" src="${data.Poster}" alt="">
                 <div class="movie-text">
@@ -33,17 +33,29 @@ function getWatchlist() {
 
 function removeFromWatchlist(movie) {
     console.log(movie.id)
+    const index = watchlist.indexOf(movie.id)
+    watchlist.splice(index, 1)
+    console.log(watchlist)
+    getWatchlist()
+    window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
+    emptyWatchlistTrigger()
 }
 
-if (movieWatchlist) {
-    getWatchlist()
-    watchlist.style.justifyContent = "flex-start"
-} else {
-    watchlist.innerHTML = `
-    <div class="empty-block">
-        <img src="/images/movie-reel-icon.png" alt="">
-        <p>Watchlist is empty</p>
-    </div>
-    `
+function emptyWatchlistTrigger() {
+    if (watchlist.length > 0) {
+        getWatchlist()
+        watchlistEl.style.justifyContent = "flex-start"
+    } else {
+        watchlistEl.innerHTML = `
+        <div class="empty-block">
+            <img src="/images/movie-reel-icon.png" alt="">
+            <p>Watchlist is empty</p>
+        </div>
+        `
+        watchlistEl.style.justifyContent = "center"
+    }
 }
+
+emptyWatchlistTrigger()
+
 

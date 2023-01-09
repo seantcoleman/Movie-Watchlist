@@ -21,7 +21,9 @@ function getMovieList() {
     fetch(`http://www.omdbapi.com/?s=${searchBar.value}&apikey=b0dd4daf`)
     .then(res => res.json())
     .then(movies => {
+        console.log(movies)
         const movieList = movies.Search.map(movie => movie.imdbID)
+        console.log(movieList)
         movieList.forEach(movie => {
             fetch(`http://www.omdbapi.com/?i=${movie}&apikey=b0dd4daf`)
                 .then(res => res.json())
@@ -36,7 +38,8 @@ function getMovieList() {
 
 function addToWatchlist(movie) {
     if (!watchlist.includes(movie.id)) {
-        console.log(movie.id)
+        document.getElementById(movie.id).children[1].innerHTML = "Added"
+        document.getElementById(movie.id).children[0].src = "/images/checkmark.png"
         watchlist.push(movie.id)
         window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
         document.getElementById(movie.id).removeAttribute('onclick')

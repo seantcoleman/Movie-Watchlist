@@ -32,11 +32,8 @@ function getWatchlist() {
 }
 
 function removeFromWatchlist(movie) {
-    console.log(movie.id)
     const index = watchlist.indexOf(movie.id)
     watchlist.splice(index, 1)
-    console.log(watchlist)
-    getWatchlist()
     window.localStorage.setItem('watchlist', JSON.stringify(watchlist))
     emptyWatchlistTrigger()
 }
